@@ -1,5 +1,6 @@
 package com.shock.contactsdemoapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -50,7 +51,7 @@ public class ContactsActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         contactsFragment = ContactsFragment.newInstance();
-        favouriteFragment = FavouriteFragment.newInstance();
+        favouriteFragment = new FavouriteFragment();
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -131,6 +132,20 @@ public class ContactsActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        contactsFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 0:
+                contactsFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+            case 1:
+                favouriteFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        favouriteFragment.onActivityResult(requestCode, resultCode, data);
     }
 }

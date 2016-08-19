@@ -9,10 +9,10 @@ import java.util.List;
 /**
  * Created by shahid on 19/8/16.
  */
-@DatabaseTable(tableName = "favourite")
+@DatabaseTable(tableName = "favourite_item")
 public class Contact implements Serializable {
 
-    @DatabaseField(id = true)
+    @DatabaseField(columnName = "id", id = true)
     private int id;
 
     @DatabaseField(columnName = "name")
@@ -21,7 +21,6 @@ public class Contact implements Serializable {
     @DatabaseField(columnName = "photo_uri")
     private String photoUri;
 
-    @DatabaseField(columnName = "favourite_id", foreign = true, foreignAutoRefresh = true, foreignColumnName = "favourite_id")
     private List<PhoneNumber> phoneNumbers;
 
     @DatabaseField(columnName = "is_favourite")

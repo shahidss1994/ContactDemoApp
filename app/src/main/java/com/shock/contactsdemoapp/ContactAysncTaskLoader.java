@@ -1,6 +1,5 @@
 package com.shock.contactsdemoapp;
 
-import android.content.AsyncTaskLoader;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,7 +8,6 @@ import android.provider.ContactsContract;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -20,11 +18,11 @@ import java.util.List;
 public class ContactAysncTaskLoader extends AsyncTask<Void, Void, List<Contact>> {
 
     Context context;
-    ContactResult contactResult;
+    ContactResultListener contactResultListener;
 
-    public ContactAysncTaskLoader(Context context, ContactResult contactResult) {
+    public ContactAysncTaskLoader(Context context, ContactResultListener contactResultListener) {
         this.context = context;
-        this.contactResult = contactResult;
+        this.contactResultListener = contactResultListener;
     }
 
     private static final String TAG = ContactAysncTaskLoader.class.getSimpleName();
@@ -42,7 +40,6 @@ public class ContactAysncTaskLoader extends AsyncTask<Void, Void, List<Contact>>
 
                 String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
                 contact.setName(name);
-
                 String photoUri = cur.getString(cur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
                 contact.setPhotoUri(photoUri);
                 if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
@@ -51,10 +48,12 @@ public class ContactAysncTaskLoader extends AsyncTask<Void, Void, List<Contact>>
                             null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
                             new String[]{id}, null);
+
                     List<PhoneNumber> phoneNumbers = new ArrayList<>();
                     while (pCur.moveToNext()) {
                         String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                         PhoneNumber phoneNumber = new PhoneNumber();
+                        phoneNumber.setRawContactId((int) pCur.getLong(pCur.getColumnIndex(ContactsContract.RawContacts._ID)));
                         phoneNumber.setFavouriteId(Integer.parseInt(id));
                         phoneNumber.setPhoneNumber(phoneNo);
                         phoneNumbers.add(phoneNumber);
@@ -78,6 +77,6 @@ public class ContactAysncTaskLoader extends AsyncTask<Void, Void, List<Contact>>
                 return contact.getName().compareTo(t1.getName());
             }
         });
-        contactResult.onContactCompleted(contacts);
+        contactResultListener.onContactCompleted(contacts);
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_bg" />
+
+    <ImageView
+        android:id="@+id/gallery"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="185dp"
+        android:background="@drawable/gallery" />
+
+    <ImageView
+        android:id="@+id/facebook"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="262dp"
+        android:background="@drawable/facebook" />
+
+    <ImageView
+        android:id="@+id/selfie"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/selfie" />
+
+    <ImageView
+        android:id="@+id/velfie"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="189dp"
+        android:background="@drawable/velfie" />
+
+    <ImageView
+        android:id="@+id/img_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/close" />
+
+</RelativeLayout>

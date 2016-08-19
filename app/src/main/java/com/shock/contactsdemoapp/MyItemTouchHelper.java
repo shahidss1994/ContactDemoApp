@@ -36,9 +36,9 @@ public class MyItemTouchHelper {
             boolean initiated;
 
             private void init() {
-                background = new ColorDrawable(Color.RED);
-                xMark = ContextCompat.getDrawable(context, R.mipmap.ic_launcher);
-                xMark.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                background = new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary));
+                xMark = ContextCompat.getDrawable(context, R.drawable.star);
+                xMark.setColorFilter(ContextCompat.getColor(context, R.color.off_white), PorterDuff.Mode.SRC_ATOP);
                 xMarkMargin = (int) context.getResources().getDimension(R.dimen.ic_clear_margin);
                 initiated = true;
             }
@@ -63,7 +63,7 @@ public class MyItemTouchHelper {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int swipedPosition = viewHolder.getAdapterPosition();
                 ContactsAdapter adapter = (ContactsAdapter) recyclerView.getAdapter();
-                adapter.addToFavourite(swipedPosition,viewHolder);
+                adapter.addToFavourite(swipedPosition, viewHolder);
             /*boolean undoOn = adapter.isUndoOn();
             if (undoOn) {
                 adapter.pendingRemoval(swipedPosition);
@@ -101,7 +101,8 @@ public class MyItemTouchHelper {
                 int xMarkBottom = xMarkTop + intrinsicHeight;
                 xMark.setBounds(xMarkLeft, xMarkTop, xMarkRight, xMarkBottom);
 
-                xMark.draw(c);
+                // draw marks
+                // xMark.draw(c);
 
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }

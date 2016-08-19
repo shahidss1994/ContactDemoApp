@@ -6,8 +6,9 @@ dataClass=com.shock.contactsdemoapp.Contact
 tableName = favourite
 # --table-fields-start--
 # --field-start--
-fieldName=id
 id=true
+fieldName=id
+columnName=id
 # --field-end--
 # --field-start--
 fieldName=name
@@ -18,13 +19,6 @@ fieldName=photo_uri
 columnName=photo_uri
 # --field-end--
 # --field-start--
-fieldName=phoneNumbers
-columnName=favourite_id
-foreign=true
-foreignAutoRefresh=true
-foreignColumnName=favourite_id
-# --field-end--
-# --field-start--
 fieldName=is_favourite
 columnName=is_favourite
 # --field-end--
@@ -33,11 +27,16 @@ columnName=is_favourite
 #################################
 # --table-start--
 dataClass=com.shock.contactsdemoapp.PhoneNumber
-tableName = favourite
+tableName = phone_number
 # --table-fields-start--
 # --field-start--
 fieldName=id
-id=true
+columnName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=rawContactId
+columnName=raw_contact_id
 # --field-end--
 # --field-start--
 fieldName=favouriteId
