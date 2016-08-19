@@ -60,4 +60,10 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         return contactDao;
     }
 
+    @Override
+    public void close() {
+        super.close();
+        contactDao = null;
+        phoneNumberDao = null;
+    }
 }
